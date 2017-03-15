@@ -15,6 +15,11 @@ class List::Node //self-referential Node class
 	
 	};//end Node class definition (can only be seen by the List class)
 
+List::List()
+{
+	frontPtr=nullptr;
+	num_elements=0;
+}
 
 List::~List()
 {
@@ -64,8 +69,8 @@ void List::remove(int k)
 	if (k < 1 or k > num_elements)//if the location is invalid 
 	     throw out_of_range("List::removeAt(...)");//throw an "out_of_range" exception
 	
-	Node* delPtr;
-	
+	Node* delPtr=nullptr;
+	int del_data;
 	if(k == 1)
 	{
 	  delPtr = frontPtr;
@@ -86,10 +91,35 @@ void List::remove(int k)
 	    delPtr = tmpPtr->link;
 	    tmpPtr->link = delPtr->link;
 	  }
-	
+        
+	del_data=delPtr->data;
 	delete delPtr;
 	num_elements--;
-	}
+}
+void List::display ()
+{
+	   
+        for (Node*currPtr=frontPtr; currPtr!=nullptr; currPtr=currPtr->link)
+          {
+             cout << currPtr->data <<" ";
+          }
+}//display
+void List::clear ()//clears list i.e removes every element
+{
+        while (num_elements!=0)
+        {
+          remove(1);
+        }
+}//clear
+int List::getAt (int k)
+{
+       Node*currPtr=frontPtr;
+       for (int loc=1; loc!=k; loc ++)
+       { 
+           currPtr=currPtr->link;
+       }
+       return currPtr->data;
+}//getAt
 	
 	//Implementations of missing operations
 	
