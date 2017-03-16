@@ -13,16 +13,11 @@ class Stack::Node //self-referential Node class
 	
 	};//end Node class definition (can only be seen by the List class)
 
-Stack::Stack()
-{
-	frontPtr=nullptr;
-	num_elements=0;
-}
 
 Stack::~Stack()
 {
     while(num_elements > 0)
-      remove(1);
+      pop();
 }
 	
 int Stack::size()
@@ -49,23 +44,16 @@ void Stack::push(int val)
 void Stack::pop()
 {
 	
-	Node*delptr;
-        int deldata;
+	Node*delPtr;
+        int del_data;
 	
 	  delPtr = frontPtr;
 	  frontPtr = frontPtr->link;
-	del_data=delptr->data; 
+	del_data=delPtr->data; 
 	delete delPtr;
 	num_elements--;
 }
-void Stack::display ()
-{
-	   
-        for (Node*currPtr=frontPtr; currPtr!=nullptr; currPtr=currPtr->link)
-          {
-             cout << currPtr->data <<" ";
-          }
-}//display
+
 void Stack::clear ()//clears list i.e removes every element
 {
         while (num_elements!=0)
